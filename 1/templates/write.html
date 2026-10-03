@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block location %}Write{% endblock %}
+{% block content %}
+<br>
+Fill the form below to post:
+<form method="POST">
+    {{ entry_form.hidden_tag() }}
+    {{ entry_form.entry_name() }} <br><br>
+    {{ entry_form.content() }} <br><br>
+    {{ entry_form.write() }}
+</form>
+{% endblock %}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>journal:{% block location %}{% endblock %}</title>
+</head>
+<body>
+    <style>
+        * {
+            margin: 2px;
+            padding: 0px;
+        }
+        .navigation a {
+            text-decoration: none;
+        }
+        .error {
+            color: red;
+        }
+        .user .user-profile-picture {
+            width: 120px;
+            height: auto;
+        }
+        .content {
+            white-space: pre-wrap;
+        }
+    </style>
+    <div class="navigation">
+        <<a href="{{ url_for('index') }}">Index</a>|<a href="{{ url_for('login') }}">Login</a>|<a href="{{ url_for('write') }}">Write</a>|<a href="{{ url_for('settings') }}">Settings</a>> ({% with messages = get_flashed_messages() %}{% for message in messages %}<b class="error">{{ message }}</b>{% endfor %}{% endwith %})
+    </div>
+    <br>
+    <div class="container">
+    {% if user %}
+    <div class="user">
+    <img class="user-profile-picture" src="{{ user.profile_picture }}" alt="User's Profile Picture"><br><b class="user-name">{{ user.user_name }}</b> (<i class="joined-dt">joined {{ user.dt }}</i>)</div>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+    </div>
+</body>
+</html>

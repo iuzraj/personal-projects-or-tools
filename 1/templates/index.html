@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block location %}Index{% endblock %}
+{% block content %}
+
+<form method="POST">
+    {{ search_form.hidden_tag() }}
+    {{ search_form.entry_name() }}
+    {{ search_form.entry_search() }}
+</form>
+
+{% if entries %}
+{% for entry in entries %}
+    ({{entry.entry_id}}. <a href="{{ url_for('entry', entry_id=entry.entry_id) }}">{{ entry.entry_name }}</a>)
+{% endfor %}
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block location %}Entry{% endblock %}
+{% block content %}
+<div class="content">{{ entry.content | sanitize }}{{ user.base_content | sanitize }}</div>
+<b class="entry-name">- {{ entry.entry_name }}</b> (<i class="entry-dt">posted {{ entry.dt }}</i>)
+{% endblock %}

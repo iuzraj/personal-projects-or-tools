@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block location %}Login{% endblock %}
+{% block content %}
+
+<form method="POST">
+    {{ login_form.hidden_tag() }}
+    {{ login_form.login_username() }}
+    {{ login_form.login_password() }}
+    {{ login_form.login_submit() }}
+</form>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block location %}Settings{% endblock %}
+{% block content %}
+Edit your profile:
+<form method="POST">
+    {{ settings_form.hidden_tag() }}
+    {{ settings_form.user_name() }} <br><br>
+    {{ settings_form.profile_picture() }} <br><br>
+    {{ settings_form.base_content() }} <br><br>
+    {{ settings_form.password() }} <br><br>
+    {{ settings_form.apply_changes() }}
+</form>
+<br>
+Change your password:
+<form method="POST">
+    {{ change_password_form.hidden_tag() }}
+    {{ change_password_form.new_password() }} <br><br>
+    {{ change_password_form.new_password_confirm() }} <br><br>
+    {{ change_password_form.old_password() }} <br><br>
+    {{ change_password_form.change_password() }}
+</form>
+{% endblock %}
