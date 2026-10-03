@@ -1,0 +1,42 @@
+"""
+.env file
+
+SECRET_KEY=
+DEBUG_MODE=
+DATABASE_FILENAME=
+SEED_USERNAME=
+DEFAULT_PROFILE_PICTURE=
+"""
+
+import os
+from dotenv import load_dotenv
+
+
+MIN_USERNAME_SIZE=3
+MAX_USERNAME_SIZE=30
+
+MIN_ENTRY_NAME_SIZE=6
+MAX_ENTRY_NAME_SIZE=100
+
+MIN_PASSWORD_SIZE=6
+MAX_PASSWORD_SIZE=60
+
+MIN_CONTENT_SIZE=15
+MAX_CONTENT_SIZE=5000
+
+MIN_BASE_CONTENT_SIZE=-1
+MAX_BASE_CONTENT_SIZE=500
+
+
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+load_dotenv(dotenv_path=os.path.join(CURRENT_DIR, ".env"))
+
+
+SECRET_KEY = os.getenv("SECRET_KEY")
+DEBUG_MODE = os.getenv("DEBUG_MODE")
+DATABASE_FILE = os.path.join(CURRENT_DIR, os.getenv("DATABASE_FILENAME"))
+SCHEMA_FILE = os.path.join(CURRENT_DIR, "schema.sql")
+SEED_USERNAME = os.getenv("SEED_USERNAME")
+DEFAULT_PROFILE_PICTURE = os.getenv("DEFAULT_PROFILE_PICTURE")
