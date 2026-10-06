@@ -1,7 +1,0 @@
-journal
-
-using the description in config.py, create the .env file,
-the value of DEBUG_MODE can either be 0 or 1,
-SEED_USERNAME is used to create new accounts during login.
-
-i used AI to generate the allowed.py file.
