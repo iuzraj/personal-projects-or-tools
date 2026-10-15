@@ -1,3 +1,7 @@
-/**/.*  # ignore all dotted files
-/**/.*/ # ignore all dotted folders
+/**/.*  
+/**/.*/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
 !/.gitignore  # except `gitignore`
