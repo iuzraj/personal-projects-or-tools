@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatApp:{% block location %}{% endblock %}</title>
+</head>
+<body>
+    <div class="navigation">
+        <a href="{{ url_for('main_bp.index') }}">index</a> |
+        <a href="{{ url_for('main_bp.register') }}">register</a>
+    </div>
+    {% with messages = get_flashed_messages() %}
+    {% for message in messages %}
+    <p class="flash">{{ message }}</p>
+    {% endfor %}
+    {% endwith %}
+    {% block content %}
+    {% endblock %}
+<style>
+    body {
+        margin: 0px;
+        padding: 0px;
+    }
+    .flash {
+        color: blue;
+    }
+</style>
+</body>
+</html>
