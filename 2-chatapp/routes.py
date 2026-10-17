@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, flash, redirect, url_for
+from flask import Blueprint, render_template, flash, redirect, url_for, session, g
 import models
 
 
@@ -21,3 +21,23 @@ def register():
         flash(status[1])
         return redirect(url_for("main_bp.register"))
     return render_template("register.html", form=register_form)
+
+
+@main_bp.route("/login", methods=["GET", "POST"])
+def login():
+    form = models.LoginForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        status = models.App().login(username, password)
+        flash(status[1])
+        if status[0] is True:
+            session["user_id"] = status[2]
+            return redirect(url_for("main_bp.home"))
+        return redirect(url_for("main_bp.login"))
+    return render_template("login.html", form=form)
+
+
+@main_bp.route("/home")
+def home():
+    return render_template("home.html", user=g.user)

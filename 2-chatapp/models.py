@@ -13,6 +13,12 @@ class RegistrationForm(FlaskForm):
     register = SubmitField("Register")
 
 
+class LoginForm(FlaskForm):
+    username = StringField("username", validators=[DataRequired(), Length(3, 30)], render_kw={"placeholder":"Enter username..."})
+    password = PasswordField("password", validators=[DataRequired(), Length(6, 80)], render_kw={"placeholder":"Enter password..."})
+    login = SubmitField("Login")
+
+
 class DB:
     def __init__(self):
         self.con = g.con
@@ -33,7 +39,7 @@ class DB:
         return data
     
     def lookup_user(self, id, type="user_id"):
-        user = self.query(f"SELECT * FROM USERS where {type} = ?", (id,))
+        user = self.query(f"SELECT * FROM users where {type} = ?", (id,))
         if not user: return None
         return User(user)
     

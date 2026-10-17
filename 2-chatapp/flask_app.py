@@ -1,5 +1,5 @@
-from flask import Flask, g, request, session, redirect, url_for
-import config, sqlite3
+from flask import Flask, g, request, session, redirect, url_for, flash
+import config, sqlite3, models
 from routes import main_bp
 
 
@@ -25,6 +25,16 @@ def close_connection(e):
 @app.before_request
 def before_request():
     get_db_con()
+    user = None
+    user_id = session.get("user_id")
+    if user_id:
+        user = models.DB().lookup_user(user_id)
+        if user is None:
+            session.pop("user_id")
+    if request.endpoint not in ["main_bp.index", "main_bp.login", "main_bp.register"] and not user:
+        flash("you need to log in to access that page.")
+        return redirect(url_for("main_bp.index"))
+    g.user = user
 
 
 if __name__ == "__main__":

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block location %}Login{% endblock %}
+{% block content %}
+Login:
+<form method="post">
+{{ form.hidden_tag() }}<br>
+{{ form.username() }}<br>
+{{ form.password() }}<br>
+{{ form.login() }}
+</form>
+{% endblock %}

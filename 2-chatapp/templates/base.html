@@ -7,12 +7,16 @@
 </head>
 <body>
     <div class="navigation">
-        <a href="{{ url_for('main_bp.index') }}">index</a> |
-        <a href="{{ url_for('main_bp.register') }}">register</a>
+        <a href="{{ url_for('main_bp.home') }}">Home</a> | 
+        <a href="{{ url_for('main_bp.index') }}">Index</a> |
+        <a href="{{ url_for('main_bp.register') }}">Register</a> |
+        <a href="{{ url_for('main_bp.login') }}">Login</a>
     </div>
     {% with messages = get_flashed_messages() %}
     {% for message in messages %}
-    <p class="flash">{{ message }}</p>
+    <p class="flash">
+        <b>{{ message }}</b>
+    </p>
     {% endfor %}
     {% endwith %}
     {% block content %}
