@@ -5,5 +5,4 @@
 *.pyo
 *.pyd
 *.db
-*.sql
 !/.gitignore
