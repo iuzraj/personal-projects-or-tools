@@ -20,8 +20,8 @@ def close_connection(e):
     db = g.pop("con", None)
     if db is not None:
         db.close()
-        
-        
+ 
+
 @app.before_request
 def before_request():
     get_db_con()

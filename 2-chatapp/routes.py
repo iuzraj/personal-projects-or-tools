@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, flash, redirect, url_for, session, g
+from flask import Blueprint, render_template, flash, redirect, url_for, session, g, request
 import models
 
 
@@ -38,6 +38,27 @@ def login():
     return render_template("login.html", form=form)
 
 
-@main_bp.route("/home")
+@main_bp.route("/home", methods=["GET", "POST"])
 def home():
-    return render_template("home.html", user=g.user)
+    group_form = models.GroupCreationForm()
+    if group_form.validate_on_submit():
+        groupname = group_form.groupname.data
+        read_only = group_form.read_only.data
+        status = models.App().create_group(g.user, groupname, int(read_only))
+        flash(status[1])
+        if status[0] is True:
+            return redirect(url_for("main_bp.home"))
+        return redirect(url_for("main_bp.home"))
+    return render_template("home.html", user=g.user, group_form=group_form)
+
+
+@main_bp.route("/group", methods=["GET", "POST"])
+def group():
+    group_id = request.args.get("group_id")
+    group = models.DB().lookup_group(group_id)
+    if not group:
+        flash("invalid group id.")
+        group_id = None
+    if not group_id:
+        return redirect(url_for("main_bp.home"))
+    return render_template("group.html", user=g.user, group=group)

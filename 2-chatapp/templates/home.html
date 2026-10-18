@@ -2,4 +2,31 @@
 {% block location %}Home{% endblock %}
 {% block content %}
 hi <b style="color:{{ user.namecolor }};">{{ user.username }}</b>
+<br>
+Create a group:
+<form method="POST">
+    {{ group_form.hidden_tag() }} <br>
+    {{ group_form.groupname() }} <br>
+    Read Only? {{ group_form.read_only() }} <br>
+    {{ group_form.create() }}
+</form>
+
+{% with invites = user.invites %}
+{% if invites %}
+{% for invite in invites %}
+{{ invite }}
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+{% with groups = user.groups %}
+{% if groups %}
+{% for group in groups %}
+{{ group.groupname }}
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+
+
 {% endblock %}
