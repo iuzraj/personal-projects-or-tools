@@ -145,10 +145,6 @@ class Invite:
     def inviter(self):
         return DB().lookup_user(self.invited_by)
     
-    @property
-    def groups(self):
-        return DB().fetch_groups(self)
-    
     
 class Group:
     def __init__(self, data):
